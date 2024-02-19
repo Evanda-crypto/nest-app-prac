@@ -1,7 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Country } from "src/countries/entities/country.entity";
+import { GlobalEntity } from "src/globals/global.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('leaders')
-export class Leader {
+export class Leader extends GlobalEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -15,4 +17,7 @@ export class Leader {
     @Column()
     country_id: number;
 
+    @OneToOne(() => Country, (country) => country.id) // specify inverse side as a second parameter
+    @JoinColumn({name:'country_id'})
+    country:Country
 }

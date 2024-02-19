@@ -19,7 +19,11 @@ export class LeadersService {
   }
 
   findAll() {
-    return this.leaderRepository.find();
+    return this.leaderRepository.find({
+      relations:{
+        country:true
+      }
+    });
   }
 
   findOne(id: number) {
