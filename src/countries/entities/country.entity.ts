@@ -1,6 +1,8 @@
+import { City } from "src/cities/entities/city.entity";
 import { GlobalEntity } from "src/globals/global.entity";
 import { Leader } from "src/leaders/entities/leader.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Timezone } from "src/timezones/entities/timezone.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('countries')
 export class Country extends GlobalEntity {
@@ -11,6 +13,13 @@ export class Country extends GlobalEntity {
     @Column({ unique: true })
     name: string;
 
-    @OneToOne(() => Leader, (laeder) => laeder.country) // specify inverse side as a second parameter
-    leader: Leader
+    @OneToOne(() => Leader, (leader) => leader.country) // specify inverse side as a second parameter
+    leader: Leader;
+
+    @OneToMany(()=>City,(city)=>city.country)
+    cities:City[];
+
+    @ManyToMany(() => Timezone)
+    @JoinTable()
+    timezones: Timezone[]
 }

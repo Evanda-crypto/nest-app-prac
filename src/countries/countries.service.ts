@@ -22,7 +22,9 @@ export class CountriesService {
   findAll() {
     return this.countryRepository.find({
       relations:{
-        leader:true
+        leader:true,
+        cities:true,
+        timezones:true
       }
     });
   }

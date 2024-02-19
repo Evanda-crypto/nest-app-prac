@@ -1,5 +1,6 @@
+import { Country } from "src/countries/entities/country.entity";
 import { GlobalEntity } from "src/globals/global.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('cities')
 export class City extends GlobalEntity {
@@ -12,5 +13,9 @@ export class City extends GlobalEntity {
 
     @Column()
     country_id:number;
+
+    @ManyToOne(()=>Country,(country)=>country.cities)
+    @JoinColumn({name:'country_id'})
+    country:Country
 
 }
