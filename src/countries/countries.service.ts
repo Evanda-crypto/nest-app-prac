@@ -19,14 +19,37 @@ export class CountriesService {
     return this.countryRepository.save(createCountryDto);
   }
 
-  findAll() {
-    return this.countryRepository.find({
+ async findAll() {
+    const countries = await this.countryRepository.find({
+      select:{
+        id:true,
+        name:true,
+        leader:{
+          id:true,
+          email:true,
+          name:true
+        },
+        cities:{
+          name:true,
+          id:true
+        },
+        timezones:{
+          id:true,
+          name:true
+        }
+      },
       relations:{
         leader:true,
         cities:true,
         timezones:true
       }
     });
+
+    return {
+      status: true,
+      message: 'ok',
+      list: countries
+    };
   }
 
   findOne(id: number) {

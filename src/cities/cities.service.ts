@@ -16,12 +16,27 @@ export class CitiesService {
     return this.cityRepository.save(createCityDto);
   }
 
-  findAll() {
-    return this.cityRepository.find({
+ async findAll() {
+    const cities = await this.cityRepository.find({
+      select:{
+        id:true,
+        name:true,
+        country:{
+          id:true,
+          name:true
+        }
+      },
       relations:{
         country:true
       }
     });
+
+
+    return {
+      status: true,
+      message: 'ok',
+      list: cities
+    };
   }
 
   findOne(id: number) {

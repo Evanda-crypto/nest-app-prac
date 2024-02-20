@@ -18,12 +18,26 @@ export class LeadersService {
     return this.leaderRepository.save(createLeaderDto);
   }
 
-  findAll() {
-    return this.leaderRepository.find({
+ async findAll() {
+    const leaders = await this.leaderRepository.find({
+      select:{
+        name:true,
+        id:true,
+        country:{
+          name:true,
+          id:true
+        }
+      },
       relations:{
         country:true
       }
     });
+
+    return {
+      status: true,
+      message: 'ok',
+      list: leaders
+    };
   }
 
   findOne(id: number) {
