@@ -62,4 +62,10 @@ export class UsersService {
   remove(id: number) {
     return this.userRepository.delete(id);
   }
+
+  signIn(email:any):Promise<User> {
+
+    return this.userRepository.findOne({where:{email:email}});
+  }
+
 }

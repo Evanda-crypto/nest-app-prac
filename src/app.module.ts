@@ -14,6 +14,7 @@ import { Timezone } from './timezones/entities/timezone.entity';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -40,6 +41,12 @@ import { AuthModule } from './auth/auth.module';
     TimezonesModule,
     UsersModule,
     AuthModule,
+    JwtModule.register({
+      secret:'secret',
+      signOptions:{
+        expiresIn:'1d'
+      }
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
