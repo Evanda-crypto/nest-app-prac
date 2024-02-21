@@ -17,8 +17,19 @@ export class TimezonesService {
     return this.timezoneRepository.save(createTimezoneDto);
   }
 
-  findAll() {
-    return this.timezoneRepository.find();
+  async findAll() {
+    const timezones = await this.timezoneRepository.find({
+      select:{
+        id:true,
+        name:true
+      }
+    });
+
+    return {
+      status: true,
+      message: 'ok',
+      list: timezones
+    };
   }
 
   findOne(id: number) {

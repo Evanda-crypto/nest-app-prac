@@ -2,6 +2,7 @@ import { City } from "src/cities/entities/city.entity";
 import { GlobalEntity } from "src/globals/global.entity";
 import { Leader } from "src/leaders/entities/leader.entity";
 import { Timezone } from "src/timezones/entities/timezone.entity";
+import { User } from "src/users/entities/user.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('countries')
@@ -18,6 +19,9 @@ export class Country extends GlobalEntity {
 
     @OneToMany(()=>City,(city)=>city.country)
     cities:City[];
+
+    @OneToMany(()=>User,(user)=>user.country)
+    users:User[];
 
     @ManyToMany(() => Timezone)
     @JoinTable()

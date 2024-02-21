@@ -11,6 +11,9 @@ import { CitiesModule } from './cities/cities.module';
 import { TimezonesModule } from './timezones/timezones.module';
 import { City } from './cities/entities/city.entity';
 import { Timezone } from './timezones/entities/timezone.entity';
+import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,7 +29,7 @@ import { Timezone } from './timezones/entities/timezone.entity';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [Leader, Country,City,Timezone],
+        entities: [Leader, Country,City,Timezone,User],
         synchronize: true,
       }),
       inject: [ConfigService],
@@ -35,6 +38,8 @@ import { Timezone } from './timezones/entities/timezone.entity';
     CountriesModule,
     CitiesModule,
     TimezonesModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

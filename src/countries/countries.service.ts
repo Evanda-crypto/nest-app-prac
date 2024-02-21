@@ -36,12 +36,18 @@ export class CountriesService {
         timezones:{
           id:true,
           name:true
+        },
+        users:{
+          name:true,
+          email:true,
+          id:true
         }
       },
       relations:{
         leader:true,
         cities:true,
-        timezones:true
+        timezones:true,
+        users:true
       }
     });
 
